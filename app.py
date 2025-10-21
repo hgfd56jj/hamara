@@ -53,14 +53,8 @@ def send_to_telegram(text: str, file_url: str):
 @app.route("/upload_audio", methods=["GET"])
 def upload_audio():
     file_url = request.args.get("file_url")
-
-    # ✅ תמיכה בימות המשיח – שימוש בפרמטר stockname אם file_url חסר
     if not file_url:
-        stockname = request.args.get("stockname")
-        if stockname:
-            file_url = f"https://www.call2all.co.il/ym/ivr2{stockname}"
-        else:
-            return jsonify({"error": "Missing 'file_url' or 'stockname' parameter"}), 400
+        return jsonify({"error": "Missing 'file_url' parameter"}), 400
 
     logging.info(f"Downloading audio from: {file_url}")
     try:
