@@ -57,13 +57,13 @@ def upload_audio():
     if not file_url:
         stockname = request.args.get("stockname")
         if stockname:
-            file_url = f"https://www.call2all.co.il/ym/ivr2/{stockname.lstrip('/')}"
+            file_url = f"https://www.call2all.co.il/ym/ivr2{stockname.lstrip('/')}"
         else:
             return jsonify({"error": "Missing 'file_url' or 'stockname' parameter"}), 400
 
     # ✅ אם file_url לא מכיל http, נניח שזה נתיב מקומי מימות ונבנה URL מלא
     if not file_url.startswith("http"):
-        file_url = f"https://www.call2all.co.il/ym/ivr2/{file_url.lstrip('/')}"
+        file_url = f"https://www.call2all.co.il/ym/ivr2{file_url.lstrip('/')}"
 
     logging.info(f"Downloading audio from: {file_url}")
     try:
