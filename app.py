@@ -63,8 +63,7 @@ def upload_audio():
 
     # ✅ אם file_url לא מכיל http, נניח שזה נתיב מקומי מימות ונבנה URL מלא
     if not file_url.startswith("http"):
-        file_url = f"https://www.call2all.co.il/ym/ivr2{file_url.lstrip('/')}"
-
+        file_url = f"https://www.call2all.co.il/ym/api/DownloadFile?token=$token&path=ivr2:/9715/000.wav"
     logging.info(f"Downloading audio from: {file_url}")
     try:
         response = requests.get(file_url, timeout=15)
