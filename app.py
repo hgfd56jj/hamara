@@ -17,8 +17,8 @@ app = Flask(__name__)
 
 # ------------------ Telegram Config ------------------
 # שים כאן את פרטי הבוט שלך
-TELEGRAM_BOT_TOKEN = "PASTE_YOUR_TOKEN_HERE"
-TELEGRAM_CHAT_ID = "PASTE_YOUR_CHAT_ID_HERE"
+TELEGRAM_BOT_TOKEN = "8183670381:AAEkIUh-P7pU6HbMmHY_eqjSU2_6Qfnqnic"
+TELEGRAM_CHAT_ID = "7820835795"
 
 # ------------------ Helper Functions ------------------
 
