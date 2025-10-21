@@ -16,7 +16,6 @@ logging.basicConfig(
 app = Flask(__name__)
 
 # ------------------ Telegram Config ------------------
-# שים כאן את פרטי הבוט שלך
 TELEGRAM_BOT_TOKEN = "8183670381:AAEkIUh-P7pU6HbMmHY_eqjSU2_6Qfnqnic"
 TELEGRAM_CHAT_ID = "7820835795"
 
@@ -58,18 +57,19 @@ def upload_audio():
     if not file_url:
         stockname = request.args.get("stockname")
         if stockname:
-            file_url = f"https://www.call2all.co.il/ym/ivr2{stockname}"
+            file_url = f"https://www.call2all.co.il/ym/ivr2{stockname.lstrip('/')}"
         else:
             return jsonify({"error": "Missing 'file_url' or 'stockname' parameter"}), 400
 
     # ✅ אם file_url לא מכיל http, נניח שזה נתיב מקומי מימות ונבנה URL מלא
     if not file_url.startswith("http"):
-        file_url = f"https://www.call2all.co.il/ym/ivr2{file_url}"
+        file_url = f"https://www.call2all.co.il/ym/ivr2{file_url.lstrip('/')}"
 
     logging.info(f"Downloading audio from: {file_url}")
     try:
         response = requests.get(file_url, timeout=15)
         if response.status_code != 200:
+            logging.error(f"Failed to download file, status: {response.status_code}")
             return jsonify({"error": "Failed to download audio file"}), 400
 
         with tempfile.NamedTemporaryFile(suffix=".wav", delete=True) as temp_input:
