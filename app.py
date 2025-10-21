@@ -57,7 +57,7 @@ def upload_audio():
     if not file_url:
         stockname = request.args.get("stockname")
         if stockname:
-            file_url = f"https://www.call2all.co.il/ym/ivr2{stockname.lstrip('/')}"
+            file_url = "https://www.call2all.co.il/ym/api/DownloadFile?token=$token&path=ivr2:/9715/000.wav"
         else:
             return jsonify({"error": "Missing 'file_url' or 'stockname' parameter"}), 400
 
